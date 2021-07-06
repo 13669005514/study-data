@@ -68,9 +68,23 @@ public class AVLTree<E> extends Tree<E>{
                 updateHeight(node);
             } else {
                 // 恢复平衡
-                rebalance(node);
+                rebalance2(node);
                 // 整棵树恢复平衡
                 break;
+            }
+        }
+    }
+
+    @Override
+    protected void afterRemove(Node<E> node) {
+        while ((node = node.parent) != null) {
+            System.out.println(2);
+            if (isBalanced(node)) {
+                // 更新高度
+                updateHeight(node);
+            } else {
+                // 恢复平衡
+                rebalance2(node);
             }
         }
     }

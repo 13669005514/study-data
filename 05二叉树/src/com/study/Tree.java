@@ -106,6 +106,12 @@ public class Tree<E> implements ITree<E>, BinaryTreeInfo {
 
     }
 
+    protected void afterRemove(Node<E> eNode) {
+
+
+
+    }
+
     private void elementNotNull(E element) {
         if (element == null) {
             throw new IllegalArgumentException("参数异常");
@@ -150,9 +156,12 @@ public class Tree<E> implements ITree<E>, BinaryTreeInfo {
             } else {
                 node.parent.right = replaceElment;
             }
-
+            // 删除节点之后的处理
+            afterRemove(node);
         } else if (node.parent == null) {
             root = null;
+            // 删除节点之后的处理
+            afterRemove(node);
         } else {
             //度为0
             if (node == node.parent.left) {
@@ -160,6 +169,8 @@ public class Tree<E> implements ITree<E>, BinaryTreeInfo {
             } else {
                 node.parent.right = null;
             }
+            // 删除节点之后的处理
+            afterRemove(node);
         }
     }
     private Node<E> successor(Node<E> node) {
